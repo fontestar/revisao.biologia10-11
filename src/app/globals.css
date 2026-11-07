@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN TOKENS
+   Sistema de estudos — todas as cores, raios e fontes vivem
+   aqui. Para trocar a identidade visual da plataforma inteira,
+   altere apenas os valores abaixo.
+   ============================================================ */
+/*
+ * DIREÇÃO DE ARTE — REVISÃO DE BIOLOGIA
+ *
+ * Conceito: caderno de campo / atlas de ciências naturais.
+ * A paleta parte de um verde-musgo profundo (vida, crescimento,
+ * clorofila) sobre um papel creme quente, como as páginas de um
+ * livro de biologie. Um tom terroso (argila) marca destaques, como
+ * anotações à lápis na margem. O fundo pontilhado lembra a textura
+ * de papel reciclado e as organelas vistas ao microscópio.
+ *
+ * Para trocar a identidade visual inteira, altere só os valores
+ * abaixo — nenhum componente tem cor escrita à mão.
+ */
+@theme {
+  --font-display: var(--font-fraunces), "Iowan Old Style", serif;
+  --font-sans: var(--font-inter), "Segoe UI", sans-serif;
+
+  /* Fundo e superfícies — papel creme quente */
+  --color-bg: #f6f4ec;
+  --color-surface: #ffffff;
+  --color-surface-muted: #edeadd;
+  --color-surface-sunken: #e4dfcb;
+
+  /* Texto — tinta verde-escura */
+  --color-ink: #1e2a22;
+  --color-ink-soft: #4d574e;
+  --color-ink-faint: #828a7e;
+
+  /* Bordas */
+  --color-border: #ded8c4;
+  --color-border-strong: #c6bda2;
+
+  /* Marca — verde-musgo (vida, crescimento, clorofila) */
+  --color-brand: #2e6b3e;
+  --color-brand-strong: #1d4729;
+  --color-brand-soft: #e2ecdf;
+  --color-brand-contrast: #f4f8f2;
+
+  /* Destaque secundário — argila (anotação à lápis na margem) */
+  --color-accent: #b25a2e;
+  --color-accent-soft: #f6e5d6;
+
+  /* Estados */
+  --color-success: #2f7d5e;
+  --color-success-soft: #e3f1ea;
+  --color-error: #b0433a;
+  --color-error-soft: #f8e6e3;
+  --color-warning: #a8761a;
+  --color-warning-soft: #f7eed9;
+
+  --color-brand-50: #eef4ea;
+  --color-brand-100: #dce8d4;
+  --color-brand-600: #2e6b3e;
+  --color-brand-700: #1d4729;
+
+  --radius-card: 1rem;
+  --radius-control: 0.6rem;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+.font-display {
+  font-optical-sizing: auto;
+}
+
+/* Matemática (KaTeX) — alinhamento fino com a tipografia da plataforma */
+.katex-inline {
+  font-size: 1em;
+}
+.katex-display-block {
+  padding: 0.35rem 0;
+}
+.katex-display-block .katex-display {
+  margin: 0;
+}
+
+/* Motivo decorativo discreto: papel pontilhado, usado só no Hero */
+.bg-dot-grid {
+  background-image: radial-gradient(var(--color-border-strong) 1.1px, transparent 1.1px);
+  background-size: 22px 22px;
+}
+
+::selection {
+  background-color: var(--color-brand-soft);
+  color: var(--color-brand-strong);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Scrollbar discreta */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 999px;
+}
+
+/* Utilitário para evitar overflow horizontal acidental */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Flip card (flashcards) */
+.flip-scene {
+  perspective: 1600px;
+}
+.flip-card {
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.flip-card.is-flipped {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  backface-visibility: hidden;
+}
+.flip-face-back {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-card {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
